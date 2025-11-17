@@ -24,3 +24,19 @@ b2 = np.zeros((1, output_dim))
 
 print("W1 shape:", W1.shape)
 print("W2 shape:", W2.shape)
+
+# Hàm kích hoạt ReLU và Sigmoid
+def relu(x):
+    return np.maximum(0, x)
+
+def sigmoid(x):
+    return 1 / (1 + np.exp(-x))
+
+# Forward pass
+def forward(X, W1, b1, W2, b2):
+    z1 = X @ W1 + b1        # (N,2) @ (2,4) -> (N,4)
+    a1 = relu(z1)           # ReLU tạo phi tuyến
+    z2 = a1 @ W2 + b2       # (N,4) @ (4,1) -> (N,1)
+    y_hat = sigmoid(z2)     # Xác suất lớp 1
+    return z1, a1, z2, y_hat
+
